@@ -12,8 +12,7 @@ function App() {
   const [gussedLetters, setGussedLetters] = useState<string[]>([])
 
   console.log(wordToGuess);
-  return 
-  <div 
+  return <div 
     style={{
       maxWidth: '800px',
       display: 'flex',
