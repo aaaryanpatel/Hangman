@@ -1,35 +1,47 @@
 import styles from "../Keyboard.module.css";
 
 const KEYS = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
 ];
 
-export function Keyboard() {
+type KeyboardProps = {
+  disabled?: boolean;
+  activeLetters: string[];
+  inactiveLetters: string[];
+  addGuessedLetter: (letter: String) => void;
+};
+
+export function Keyboard({
+  activeLetters,
+  inactiveLetters,
+  disabled = false,
+  addGuessedLetter,
+}: KeyboardProps) {
   return (
     <div
       style={{
@@ -39,8 +51,16 @@ export function Keyboard() {
       }}
     >
       {KEYS.map((key) => {
+        const isActive = activeLetters.includes(key);
+        const isInactive = inactiveLetters.includes(key);
+
         return (
-          <button className={`${styles.btn}`} key={key}>
+          <button
+            onClick={() => addGuessedLetter(key)}
+            className={`${styles.btn} ${isActive ? styles.active : ""} ${isInactive ? styles.active : ""}`}
+            disabled={isInactive || isActive || disabled}
+            key={key}
+          >
             {key}
           </button>
         );
